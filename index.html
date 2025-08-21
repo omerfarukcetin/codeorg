@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İhlas Koleji Robotik Kodlama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1e40af',
+                        'secondary-blue': '#3b82f6',
+                        'light-blue': '#93c5fd',
+                        'dark-blue': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .activity-card {
+            transition: all 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Dark mode support -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-2xl">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center">
+                <div class="flex justify-center items-center mb-4">
+                    <i class="fas fa-robot text-6xl mr-4"></i>
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-bold">İhlas Koleji</h1>
+                        <h2 class="text-2xl md:text-3xl font-semibold mt-2">Robotik Kodlama</h2>
+                    </div>
+                </div>
+                <p class="text-xl opacity-90 max-w-2xl mx-auto">
+                    1. Sınıf öğrencileri için eğlenceli robotik ve kodlama etkinlikleri
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Welcome Section -->
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+                Robotik Dünyasına Hoş Geldin!
+            </h3>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Eğlenceli etkinliklerle kodlama öğrenmeye başla. Her etkinlik seni yeni bir maceraya götürecek!
+            </p>
+        </div>
+
+        <!-- Activities Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Activity 1 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity1')">
+                <div class="text-center">
+                    <div class="bg-blue-100 dark:bg-blue-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-play-circle text-3xl text-secondary-blue"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">İlk Adımlar</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Kodlamanın temel kavramlarını öğren</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        Başla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity 2 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity2')">
+                <div class="text-center">
+                    <div class="bg-green-100 dark:bg-green-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-puzzle-piece text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Algoritma Oyunları</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Adım adım düşünmeyi öğren</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        Oyna
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity 3 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity3')">
+                <div class="text-center">
+                    <div class="bg-purple-100 dark:bg-purple-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cogs text-3xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Robot Hareket</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Robotunu hareket ettirmeyi öğren</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        Keşfet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity 4 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity4')">
+                <div class="text-center">
+                    <div class="bg-yellow-100 dark:bg-yellow-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-3xl text-yellow-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Sensör Keşfi</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Robotun nasıl algıladığını öğren</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        İncele
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity 5 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity5')">
+                <div class="text-center">
+                    <div class="bg-red-100 dark:bg-red-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gamepad text-3xl text-red-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Eğlenceli Projeler</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Öğrendiklerini pratikte uygula</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        Yap
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activity 6 -->
+            <div class="activity-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-secondary-blue" onclick="openActivity('activity6')">
+                <div class="text-center">
+                    <div class="bg-indigo-100 dark:bg-indigo-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-trophy text-3xl text-indigo-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Çallenge</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Kendini test et ve ilerle</p>
+                    <button class="bg-secondary-blue text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-blue transition-colors">
+                        Yarış
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Facts Section -->
+        <div class="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                    Robotik Kodlama ile...
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <i class="fas fa-brain text-4xl text-secondary-blue mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 dark:text-white">Problem Çözme</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Analitik düşünme becerilerini geliştir</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-users text-4xl text-secondary-blue mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 dark:text-white">Takım Çalışması</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">İşbirliği yaparak öğren</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-rocket text-4xl text-secondary-blue mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 dark:text-white">Yaratıcılık</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Hayal gücünü kodla birleştir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center mb-4">
+                <i class="fas fa-robot text-2xl mr-2"></i>
+                <span class="text-lg font-semibold">İhlas Koleji Robotik Kodlama</span>
+            </div>
+            <p class="opacity-80">Geleceğin teknoloji liderleri burada yetişiyor</p>
+        </div>
+    </footer>
+
+    <script>
+        function openActivity(activityId) {
+            // Bu fonksiyonu etkinlik linklerinizi eklemek için kullanabilirsiniz
+            // Şu an için placeholder
+            const activityLinks = {
+                'activity1': 'etkinlik1.html',  // Buraya gerçek link ekleyeceksiniz
+                'activity2': '#',  // Buraya gerçek link ekleyeceksiniz
+                'activity3': '#',  // Buraya gerçek link ekleyeceksiniz
+                'activity4': '#',  // Buraya gerçek link ekleyeceksiniz
+                'activity5': '#',  // Buraya gerçek link ekleyeceksiniz
+                'activity6': '#'   // Buraya gerçek link ekleyeceksiniz
+            };
+            
+            const link = activityLinks[activityId];
+            if (link && link !== '#') {
+                window.open(link, '_blank');
+            } else {
+                // Geçici olarak bir uyarı gösterelim
+                showNotification('Bu etkinlik için link henüz eklenmemiş. Lütfen link bilgilerini sağlayın.');
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animasyon için kısa bir gecikme
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // 3 saniye sonra kaldır
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Kartlara hover efekti ekle
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.activity-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
