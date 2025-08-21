@@ -1,0 +1,403 @@
+<!DOCTYPE html><html><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodlama Macerası</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #e0f7fa;
+            transition: background-color 0.5s;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .level-info {
+            font-size: 24px;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .grid-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .grid.size-3 { grid-template-columns: repeat(3, 90px); }
+        .grid.size-4 { grid-template-columns: repeat(4, 90px); }
+        .grid.size-5 { grid-template-columns: repeat(5, 90px); }
+
+        .cell {
+            width: 90px;
+            height: 90px;
+            border: 3px solid #e0e0e0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .cell.obstacle {
+            background: #ffebee;
+            border-color: #ffcdd2;
+        }
+
+        .controls-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .commands {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .command-btn {
+            width: 70px;
+            height: 70px;
+            font-size: 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .command-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .command-btn.up { background: #2196F3; }
+        .command-btn.down { background: #4CAF50; }
+        .command-btn.left { background: #FFC107; }
+        .command-btn.right { background: #9C27B0; }
+
+        .code-area {
+            min-height: 100px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .code-step {
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .code-step.up { background: #2196F3; }
+        .code-step.down { background: #4CAF50; }
+        .code-step.left { background: #FFC107; }
+        .code-step.right { background: #9C27B0; }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .control-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #playBtn { background: #4CAF50; }
+        #resetBtn { background: #f44336; }
+
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 40px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 100;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .hand-guide {
+            position: absolute;
+            font-size: 50px;
+            animation: point 2s infinite;
+            pointer-events: none;
+            display: none;
+        }
+
+        @keyframes point {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+    </style>
+<script src="https://puc.poecdn.net/authenticated_preview_page/syncedState.bd4eeeb8e8e02052ee92.js"></script></head>
+<body>
+    <div class="header">
+        <div class="level-info">Seviye: 1</div>
+    </div>
+
+    <div class="grid-container">
+        <div id="gameGrid" class="grid size-3"></div>
+    </div>
+
+    <div class="controls-container">
+        <div class="commands">
+            <button class="command-btn up">⬆️</button>
+            <button class="command-btn down">⬇️</button>
+            <button class="command-btn left">⬅️</button>
+            <button class="command-btn right">➡️</button>
+        </div>
+
+        <div class="code-area"></div>
+
+        <div class="control-buttons">
+            <button id="playBtn" class="control-btn">▶️ Başlat</button>
+            <button id="resetBtn" class="control-btn">🔄 Sıfırla</button>
+        </div>
+    </div>
+
+    <div class="hand-guide">👆</div>
+    <div class="message"></div>
+
+    <script>
+        const themes = [
+            {
+                character: '🐝',
+                target: '🌻',
+                obstacle: '🌳',
+                bgColor: '#e0f7fa',
+                errorMsg: 'Arı çiçeğe ulaşamadı! Tekrar dene!'
+            },
+            {
+                character: '🚀',
+                target: '🌟',
+                obstacle: '☄️',
+                bgColor: '#e8eaf6',
+                errorMsg: 'Uzay aracı yıldıza ulaşamadı! Tekrar dene!'
+            },
+            {
+                character: '🐠',
+                target: '🐚',
+                obstacle: '🌊',
+                bgColor: '#e0f2f1',
+                errorMsg: 'Balık kabuğa ulaşamadı! Tekrar dene!'
+            }
+        ];
+
+        let currentLevel = 1;
+        let currentTheme = 0;
+        let gridSize = 3;
+        let playerPos = { x: 0, y: 0 };
+        let targetPos = { x: 2, y: 2 };
+        let commands = [];
+        let isPlaying = false;
+
+        function initializeGame() {
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = '';
+            grid.className = `grid size-${gridSize}`;
+
+            // Update theme
+            document.body.style.backgroundColor = themes[currentTheme].bgColor;
+
+            // Create grid
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    
+                    if (x === playerPos.x && y === playerPos.y) {
+                        cell.textContent = themes[currentTheme].character;
+                    } else if (x === targetPos.x && y === targetPos.y) {
+                        cell.textContent = themes[currentTheme].target;
+                    } else if (Math.random() < 0.2 && !(x === targetPos.x && y === targetPos.y)) {
+                        cell.textContent = themes[currentTheme].obstacle;
+                        cell.classList.add('obstacle');
+                    }
+                    
+                    grid.appendChild(cell);
+                }
+            }
+
+            document.querySelector('.level-info').textContent = `Seviye: ${currentLevel}`;
+
+            if (currentLevel === 1) {
+                showHandGuide();
+            }
+        }
+
+        function showHandGuide() {
+            const guide = document.querySelector('.hand-guide');
+            const firstCommand = document.querySelector('.command-btn');
+            const rect = firstCommand.getBoundingClientRect();
+            
+            guide.style.display = 'block';
+            guide.style.left = `${rect.left}px`;
+            guide.style.top = `${rect.top}px`;
+
+            setTimeout(() => {
+                guide.style.display = 'none';
+            }, 5000);
+        }
+
+        function showMessage(text, isError = false) {
+            const message = document.querySelector('.message');
+            message.textContent = text;
+            message.style.background = isError ? '#ffebee' : '#e8f5e9';
+            message.style.color = isError ? '#c62828' : '#2e7d32';
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateLevel() {
+            currentLevel++;
+            if (currentLevel % 5 === 1) {
+                currentTheme = (currentTheme + 1) % themes.length;
+                if (gridSize < 5) gridSize++;
+            }
+            playerPos = { x: 0, y: 0 };
+            targetPos = { x: gridSize - 1, y: gridSize - 1 };
+            commands = [];
+            document.querySelector('.code-area').innerHTML = '';
+            initializeGame();
+        }
+
+        document.querySelectorAll('.command-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (isPlaying) return;
+                
+                const direction = btn.classList.contains('up') ? 'up' : 
+                                btn.classList.contains('down') ? 'down' :
+                                btn.classList.contains('left') ? 'left' : 'right';
+                
+                const codeStep = document.createElement('div');
+                codeStep.className = `code-step ${direction}`;
+                codeStep.textContent = btn.textContent;
+                document.querySelector('.code-area').appendChild(codeStep);
+                commands.push(direction);
+            });
+        });
+
+        document.getElementById('playBtn').addEventListener('click', async () => {
+            if (isPlaying) return;
+            isPlaying = true;
+
+            const cells = document.querySelectorAll('.cell');
+            let currentPos = {...playerPos};
+            let success = true;
+
+            for (const command of commands) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                const oldIndex = currentPos.y * gridSize + currentPos.x;
+                
+                switch (command) {
+                    case 'up': currentPos.y = Math.max(0, currentPos.y - 1); break;
+                    case 'down': currentPos.y = Math.min(gridSize - 1, currentPos.y + 1); break;
+                    case 'left': currentPos.x = Math.max(0, currentPos.x - 1); break;
+                    case 'right': currentPos.x = Math.min(gridSize - 1, currentPos.x + 1); break;
+                }
+
+                const newIndex = currentPos.y * gridSize + currentPos.x;
+                
+                if (cells[newIndex].classList.contains('obstacle')) {
+                    success = false;
+                    break;
+                }
+
+                cells[oldIndex].textContent = '';
+                cells[newIndex].textContent = themes[currentTheme].character;
+            }
+
+            isPlaying = false;
+
+            if (success && currentPos.x === targetPos.x && currentPos.y === targetPos.y) {
+                showMessage('Harika! Seviye tamamlandı! 🎉');
+                setTimeout(updateLevel, 1500);
+            } else {
+                showMessage(themes[currentTheme].errorMsg, true);
+                setTimeout(() => {
+                    initializeGame();
+                }, 1500);
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            commands = [];
+            document.querySelector('.code-area').innerHTML = '';
+            initializeGame();
+        });
+
+        initializeGame();
+    </script>
+
+
+</body></html>
