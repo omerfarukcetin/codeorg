@@ -218,7 +218,7 @@
             
             const link = activityLinks[activityId];
             if (link && link !== '#') {
-                window.open(link, '_blank');
+                window.open(link, '_self');
             } else {
                 // Geçici olarak bir uyarı gösterelim
                 showNotification('Bu etkinlik için link henüz eklenmemiş. Lütfen link bilgilerini sağlayın.');
