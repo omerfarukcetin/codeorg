@@ -1,0 +1,1504 @@
+<!DOCTYPE html><html lang="tr" class="scroll-smooth"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Elektrik Dünyası - 1. Sınıf</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        electric: '#FFD700',
+                        success: '#10B981',
+                        danger: '#EF4444'
+                    },
+                    fontSize: {
+                        'huge': '4rem',
+                        'mega': '6rem'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        .pulse-slow {
+            animation: pulse 3s infinite;
+        }
+        .glow {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+        .switch {
+            transition: all 0.3s ease;
+        }
+        .switch.on {
+            background-color: #10B981;
+            transform: translateX(100%);
+        }
+        .bulb {
+            transition: all 0.5s ease;
+        }
+        .bulb.on {
+            color: #FFD700;
+            text-shadow: 0 0 20px #FFD700;
+        }
+        .wire {
+            height: 4px;
+            background: linear-gradient(90deg, #8B5CF6, #EC4899);
+            transition: all 0.5s ease;
+        }
+        .wire.active {
+            background: linear-gradient(90deg, #FFD700, #F59E0B);
+            box-shadow: 0 0 10px #FFD700;
+        }
+    </style>
+<script src="https://puc.poecdn.net/authenticated_preview_page/syncedState.bd4eeeb8e8e02052ee92.js"></script></head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300">
+
+    <!-- Ana Menü -->
+    <div id="mainMenu" class="min-h-screen p-4">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="text-mega mb-4">⚡</div>
+            <h1 class="text-4xl font-bold text-primary mb-2">Elektrik Dünyası</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">1. Sınıf Elektrik Devreler</p>
+        </header>
+
+        <!-- Haftalık Program -->
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Hafta 1 -->
+            <div class="week-card bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(1)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">💡</div>
+                    <h3 class="text-xl font-bold mb-2">1. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Manuel Anahtarla Lamba</p>
+                </div>
+            </div>
+
+            <!-- Hafta 2 -->
+            <div class="week-card bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(2)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🧲</div>
+                    <h3 class="text-xl font-bold mb-2">2. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Mıknatıslı Anahtar</p>
+                </div>
+            </div>
+
+            <!-- Hafta 3 -->
+            <div class="week-card bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900 dark:to-yellow-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(3)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🔗</div>
+                    <h3 class="text-xl font-bold mb-2">3. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Seri Bağlama</p>
+                </div>
+            </div>
+
+            <!-- Hafta 4 -->
+            <div class="week-card bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900 dark:to-purple-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(4)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">4. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Paralel Bağlama</p>
+                </div>
+            </div>
+
+            <!-- Hafta 5 -->
+            <div class="week-card bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(5)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🔴</div>
+                    <h3 class="text-xl font-bold mb-2">5. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">LED Lambalar</p>
+                </div>
+            </div>
+
+            <!-- Hafta 6 -->
+            <div class="week-card bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900 dark:to-orange-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(6)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">6. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">En Kısa Yol</p>
+                </div>
+            </div>
+
+            <!-- Hafta 7 -->
+            <div class="week-card bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-900 dark:to-pink-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(7)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🚨</div>
+                    <h3 class="text-xl font-bold mb-2">7. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Alarm Sesleri</p>
+                </div>
+            </div>
+
+            <!-- Hafta 8 -->
+            <div class="week-card bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-900 dark:to-indigo-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="goToWeek(8)">
+                <div class="text-center">
+                    <div class="text-huge mb-4">🎵</div>
+                    <h3 class="text-xl font-bold mb-2">8. Hafta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Müzik Kutusu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta Sayfaları -->
+
+    <!-- Hafta 1: Manuel Anahtarla Lamba -->
+    <div id="week1" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <!-- Geri Butonu -->
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">💡</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">1. Hafta: Manuel Anahtarla Lamba</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🤔 Manuel Anahtar Nedir?</h2>
+                <div class="text-lg space-y-4">
+                    <p>Merhaba küçük elektrikçiler! 🌟</p>
+                    <p>Evimizde lambaları açıp kapatan anahtarlar var. Bunlara <strong>manuel anahtar</strong> diyoruz.</p>
+                    <p><strong>Manuel</strong> = Elimizle yapmak demek! 🖐️ Fransızca bir kelime!</p>
+                    <p>Manuel anahtarın özellikleri:</p>
+                    <ul class="list-disc list-inside space-y-2 pl-4">
+                        <li>⚡ Elektrik devresini açar ve kapatır</li>
+                        <li>👆 Parmağımızla basarak çalıştırırız</li>
+                        <li>🔄 Açık/kapalı iki durumu vardır</li>
+                        <li>🏠 Her evde mutlaka bulunur</li>
+                        <li>💡 Lambayı kontrol eder</li>
+                    </ul>
+                    <p>Anahtar kapalıyken elektrik geçemez, açıkken elektrik geçer ve lamba yanar! ✨</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🏠 Evimizde Nerede Var?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🛏️</div>
+                        <p>Yatak Odası</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚿</div>
+                        <p>Banyo</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🍳</div>
+                        <p>Mutfak</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">📺</div>
+                        <p>Salon</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik 1 -->
+            <div class="bg-gray-800 p-8 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-center text-white">🎮 Lambayla Oynayalım!</h2>
+                <div class="text-center">
+                    <div class="mb-8">
+                        <div id="bulb1" class="bulb text-mega mb-4 transition-all duration-500">💡</div>
+                        <p class="text-xl mb-4 text-gray-300">Anahtura bas ve lambayı yak! 👆</p>
+                    </div>
+                    
+                    <!-- Anahtar -->
+                    <div class="bg-gray-500 w-24 h-12 rounded-full p-2 mx-auto mb-6 relative cursor-pointer border-4 border-gray-400" onclick="toggleSwitch1()">
+                        <div id="switch1" class="switch w-8 h-8 bg-gray-200 rounded-full shadow-lg"></div>
+                    </div>
+                    
+                    <div id="status1" class="text-xl font-bold text-gray-300">Lamba Kapalı 😴</div>
+                </div>
+            </div>
+
+            <!-- Ek Etkinlik: Evdeki Anahtarlar -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🏠 Evdeki Anahtarları Bul!</h2>
+                <p class="text-lg mb-4 text-center">Evinde hangi odalarda anahtar var? Tıklayarak keşfet!</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="room-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors" onclick="discoverRoom('bedroom')">
+                        <div class="text-huge mb-2">🛏️</div>
+                        <p class="font-bold">Yatak Odası</p>
+                        <div id="bedroom-switches" class="text-sm text-gray-600 dark:text-gray-400 mt-2 hidden">
+                            ✅ Tavan lambası<br>
+                            ✅ Abajur anahtarı<br>
+                            ✅ Kapı anahtarı
+                        </div>
+                    </div>
+                    <div class="room-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors" onclick="discoverRoom('kitchen')">
+                        <div class="text-huge mb-2">🍳</div>
+                        <p class="font-bold">Mutfak</p>
+                        <div id="kitchen-switches" class="text-sm text-gray-600 dark:text-gray-400 mt-2 hidden">
+                            ✅ Ana lamba<br>
+                            ✅ Ocak altı ışığı<br>
+                            ✅ Buzdolabı ışığı
+                        </div>
+                    </div>
+                    <div class="room-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors" onclick="discoverRoom('bathroom')">
+                        <div class="text-huge mb-2">🚿</div>
+                        <p class="font-bold">Banyo</p>
+                        <div id="bathroom-switches" class="text-sm text-gray-600 dark:text-gray-400 mt-2 hidden">
+                            ✅ Tavan lambası<br>
+                            ✅ Ayna ışığı<br>
+                            ✅ Vantilatör
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Öğrendiklerimi Test Edelim!</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Manuel anahtar ne demek?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">🤖</span> Robotla çalışan
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🖐️</span> Elimizle çalıştırdığımız
+                        </button>
+                    </div>
+                    <div id="quiz1Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 2: Mıknatıslı Kontrollü Anahtar -->
+    <div id="week2" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🧲</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">2. Hafta: Mıknatıslı Kontrollü Anahtar</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧲 Sihirli Mıknatıs!</h2>
+                <div class="text-lg space-y-4">
+                    <p>Bu sefer elimizi kullanmayacağız! 🙌</p>
+                    <p><strong>Mıknatıslı anahtar</strong>, mıknatıs yaklaştırınca kendiliğinden çalışır!</p>
+                    <p>Mıknatıs uzaklaştırınca da kapanır. Ne kadar eğlenceli! 🎪</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌟 Nerede Kullanılır?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚪</div>
+                        <p>Kapı Alarmları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚗</div>
+                        <p>Araç Kapıları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">💻</div>
+                        <p>Laptop Kapakları</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik 1 -->
+            <div class="bg-gray-800 p-8 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-center text-white">🎮 Mıknatıslı Lamba!</h2>
+                <div class="text-center">
+                    <div class="mb-8">
+                        <div id="bulb2" class="bulb text-mega mb-4 transition-all duration-500">💡</div>
+                        <p class="text-xl mb-4 text-gray-300">Mıknatısı aşağıdaki sarı kutuya sürükle! 🧲</p>
+                    </div>
+                    
+                    <!-- Mıknatıs Sürükleme Alanı -->
+                    <div class="relative mx-auto max-w-md h-48 bg-gray-700 rounded-xl border-2 border-gray-600 mb-6" id="magnetArea">
+                        <div id="magnet" class="text-huge cursor-pointer absolute top-4 left-1/2 transform -translate-x-1/2 select-none" style="transition: all 0.3s ease; user-select: none;" onmousedown="startDrag(event)" ontouchstart="startDrag(event)">🧲</div>
+                        
+                        <!-- Mıknatıs Algılama Bölgesi -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-16 bg-yellow-400 rounded-lg border-4 border-yellow-500 flex items-center justify-center" id="magnetZone">
+                            <span class="text-lg font-bold text-gray-800">Buraya Sürükle</span>
+                        </div>
+                        
+                        <!-- Mesafe Göstergesi -->
+                        <div class="absolute top-2 left-2 text-sm text-gray-400" id="distanceIndicator">Mesafe: Uzak</div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <div id="status2" class="text-xl font-bold text-gray-300">Mıknatısı sarı kutuya sürükle! 🎯</div>
+                        <button onclick="resetMagnet()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                            <span class="text-lg mr-1">🔄</span> Sıfırla
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ek Etkinlik: Mıknatıs Güç Testi -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">⚡ Mıknatıs Güç Testi!</h2>
+                <p class="text-lg mb-4 text-center">Farklı uzaklıklardan mıknatısın gücünü test et!</p>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-md">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">🧲</div>
+                        <div class="flex-1 mx-4 relative">
+                            <div class="h-2 bg-gray-300 rounded-full"></div>
+                            <div id="powerBar" class="h-2 bg-gradient-to-r from-red-400 to-green-400 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="text-3xl" id="testBulb">💡</div>
+                    </div>
+                    <input type="range" min="0" max="100" value="0" class="w-full" id="magnetSlider" oninput="testMagnetPower(this.value)">
+                    <div class="text-center mt-2">
+                        <span class="text-sm">Uzak</span>
+                        <span class="text-sm float-right">Yakın</span>
+                    </div>
+                    <div id="powerStatus" class="text-center mt-4 font-bold">Mıknatısı yaklaştır!</div>
+                </div>
+            </div>
+
+            <!-- Ek Etkinlik: Mıknatıs Deneyi -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🔬 Mıknatıs Keşfi!</h2>
+                <p class="text-lg mb-4 text-center">Hangi eşyalar mıknatıslıdır? Tahmin et ve öğren!</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="item-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-green-100 dark:hover:bg-green-800 transition-colors" onclick="testMagnetic('scissors')">
+                        <div class="text-huge mb-2">✂️</div>
+                        <p class="font-bold">Makas</p>
+                        <div id="scissors-result" class="text-sm mt-2 hidden">✅ Mıknatıslı!</div>
+                    </div>
+                    <div class="item-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-green-100 dark:hover:bg-green-800 transition-colors" onclick="testMagnetic('pencil')">
+                        <div class="text-huge mb-2">✏️</div>
+                        <p class="font-bold">Kalem</p>
+                        <div id="pencil-result" class="text-sm mt-2 hidden">❌ Mıknatıslı değil!</div>
+                    </div>
+                    <div class="item-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-green-100 dark:hover:bg-green-800 transition-colors" onclick="testMagnetic('coin')">
+                        <div class="text-huge mb-2">🪙</div>
+                        <p class="font-bold">Para</p>
+                        <div id="coin-result" class="text-sm mt-2 hidden">✅ Mıknatıslı!</div>
+                    </div>
+                    <div class="item-card bg-white dark:bg-gray-800 p-4 rounded-xl cursor-pointer hover:bg-green-100 dark:hover:bg-green-800 transition-colors" onclick="testMagnetic('plastic')">
+                        <div class="text-huge mb-2">🧸</div>
+                        <p class="font-bold">Plastik</p>
+                        <div id="plastic-result" class="text-sm mt-2 hidden">❌ Mıknatıslı değil!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Test Zamanı!</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Mıknatıslı anahtar nasıl çalışır?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🧲</span> Mıknatıs yaklaştırınca
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">👆</span> Parmakla basınca
+                        </button>
+                    </div>
+                    <div id="quiz2Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 3: Seri Bağlama -->
+    <div id="week3" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🔗</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">3. Hafta: Seri Bağlama</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-yellow-50 dark:bg-yellow-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🔗 Seri Nedir?</h2>
+                <div class="text-lg space-y-4">
+                    <p><strong>Seri bağlama</strong> = Tek sıra halinde bağlamak! 🚂</p>
+                    <p>Tıpkı tren vagonları gibi, lambalar da tek sıra halinde bağlanır.</p>
+                    <p>Elektrik tüm lambalardan geçer, ama hepsi aynı gücü paylaşır! ⚡</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌟 Örnekler</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚂</div>
+                        <p>Tren Vagonları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🔗</div>
+                        <p>Bisiklet Zinciri</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🧮</div>
+                        <p>Tesbih Taneleri</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Seri Devre Oynayalım!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">Anahtarı açınca ne olur? Gözlemle! 👀</p>
+                    
+                    <!-- Seri Devre -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-md">
+                        <div class="flex items-center justify-center space-x-4 mb-4">
+                            <div class="text-4xl">🔋</div>
+                            <div id="wire1" class="wire w-8 rounded"></div>
+                            <div id="seriesBulb1" class="bulb text-3xl">💡</div>
+                            <div id="wire2" class="wire w-8 rounded"></div>
+                            <div id="seriesBulb2" class="bulb text-3xl">💡</div>
+                            <div id="wire3" class="wire w-8 rounded"></div>
+                        </div>
+                        
+                        <!-- Anahtar -->
+                        <div class="bg-gray-300 dark:bg-gray-600 w-20 h-10 rounded-full p-1 mx-auto cursor-pointer" onclick="toggleSeries()">
+                            <div id="seriesSwitch" class="switch w-8 h-8 bg-gray-600 dark:bg-gray-300 rounded-full"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="seriesStatus" class="text-xl font-bold mt-4">Anahtarı aç ve gözlemle! 🔍</div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Anlayabildin Mi?</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Seri bağlamada lambalar nasıl dizilir?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🚂</span> Tek sıra halinde
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">🌐</span> Ayrı ayrı dallanarak
+                        </button>
+                    </div>
+                    <div id="quiz3Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 4: Paralel Bağlama -->
+    <div id="week4" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🌐</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">4. Hafta: Paralel Bağlama</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌐 Paralel Nedir?</h2>
+                <div class="text-lg space-y-4">
+                    <p><strong>Paralel bağlama</strong> = Ayrı yollardan bağlamak! 🛤️</p>
+                    <p>Her lamba kendi yoluna sahip. Biri bozulsa diğeri çalışmaya devam eder!</p>
+                    <p>Evdeki odalar böyle bağlıdır. Mutfak lambası bozulsa salon ışığı yanar! 💡</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-orange-50 dark:bg-orange-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🏠 Evimizde Paralel!</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🏠</div>
+                        <p>Ev Odaları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🔌</div>
+                        <p>Prizler</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚗</div>
+                        <p>Araba Işıkları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">📱</div>
+                        <p>Telefon Şarjı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Paralel Devre Deneyi!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">Her lambanın ayrı anahtarı var! 🎛️</p>
+                    
+                    <!-- Paralel Devre -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-lg">
+                        <!-- Üst Dal -->
+                        <div class="flex items-center justify-center space-x-2 mb-4">
+                            <div class="text-3xl">🔋</div>
+                            <div id="wireP1" class="wire w-6 rounded"></div>
+                            <div class="bg-gray-300 dark:bg-gray-600 w-12 h-6 rounded-full p-1 cursor-pointer" onclick="toggleParallel(1)">
+                                <div id="parallelSwitch1" class="switch w-4 h-4 bg-gray-600 dark:bg-gray-300 rounded-full" style="transform: scale(0.5);"></div>
+                            </div>
+                            <div id="wireP2" class="wire w-6 rounded"></div>
+                            <div id="parallelBulb1" class="bulb text-3xl">💡</div>
+                        </div>
+                        
+                        <!-- Alt Dal -->
+                        <div class="flex items-center justify-center space-x-2">
+                            <div class="text-3xl opacity-0">🔋</div>
+                            <div id="wireP3" class="wire w-6 rounded"></div>
+                            <div class="bg-gray-300 dark:bg-gray-600 w-12 h-6 rounded-full p-1 cursor-pointer" onclick="toggleParallel(2)">
+                                <div id="parallelSwitch2" class="switch w-4 h-4 bg-gray-600 dark:bg-gray-300 rounded-full" style="transform: scale(0.5);"></div>
+                            </div>
+                            <div id="wireP4" class="wire w-6 rounded"></div>
+                            <div id="parallelBulb2" class="bulb text-3xl">💡</div>
+                        </div>
+                    </div>
+                    
+                    <div id="parallelStatus" class="text-xl font-bold mt-4">Anahtarları tek tek dene! 🎯</div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-pink-50 dark:bg-pink-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Farkı Anladın Mı?</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Paralel bağlamada lambalar nasıl çalışır?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">🔗</span> Hepsi birlikte
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🛤️</span> Ayrı ayrı
+                        </button>
+                    </div>
+                    <div id="quiz4Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 5: LED Lambalar -->
+    <div id="week5" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🔴</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">5. Hafta: LED Lambalar</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-red-50 dark:bg-red-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🔴 LED Özeldir!</h2>
+                <div class="text-lg space-y-4">
+                    <p><strong>LED</strong> = Işık Veren Diyot! ✨</p>
+                    <p>LED'ler normal lambalardan farklıdır. Sadece <strong>bir yönde</strong> çalışırlar!</p>
+                    <p>Yanlış tarafa taktığınızda yanmazlar. Doğru tarafa takmalısınız! ➡️</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌈 LED'ler Nerede?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">📱</div>
+                        <p>Telefon Ekranı</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">💻</div>
+                        <p>Bilgisayar</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚗</div>
+                        <p>Araba Farları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🏠</div>
+                        <p>Ev Aydınlatması</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-yellow-50 dark:bg-yellow-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 LED Yön Deneyi!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">LED'i çevir ve ne olduğunu gör! 🔄</p>
+                    
+                    <!-- LED Devre -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-md">
+                        <div class="flex items-center justify-center space-x-4 mb-4">
+                            <div class="text-4xl">🔋</div>
+                            <div id="ledWire1" class="wire w-8 rounded"></div>
+                            <div id="ledLight" class="text-3xl cursor-pointer transform transition-transform duration-500" onclick="flipLED()">⚫</div>
+                            <div id="ledWire2" class="wire w-8 rounded"></div>
+                            <div class="text-4xl">⚫</div>
+                        </div>
+                        
+                        <!-- Anahtar -->
+                        <div class="bg-gray-300 dark:bg-gray-600 w-20 h-10 rounded-full p-1 mx-auto cursor-pointer" onclick="toggleLED()">
+                            <div id="ledSwitch" class="switch w-8 h-8 bg-gray-600 dark:bg-gray-300 rounded-full"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 space-y-2">
+                        <button onclick="flipLED()" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors">
+                            <span class="text-xl mr-2">🔄</span> LED'i Çevir
+                        </button>
+                        <div id="ledStatus" class="text-xl font-bold">LED'i çevir ve anahtarı dene! 🧪</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 LED'i Öğrendin Mi?</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">LED'in özelliği nedir?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">➡️</span> Tek yönde çalışır
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">🔄</span> Her yönde çalışır
+                        </button>
+                    </div>
+                    <div id="quiz5Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 6: En Kısa Yol -->
+    <div id="week6" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">⚡</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">6. Hafta: Elektriğin En Kısa Yolu</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-orange-50 dark:bg-orange-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">⚡ Elektrik Tembel!</h2>
+                <div class="text-lg space-y-4">
+                    <p>Elektrik çok tembel! 😴 Hep en kısa yolu seçer.</p>
+                    <p>Eğer kolay bir yol varsa, oradan gider. Zor yolu hiç sevmez! 🛤️</p>
+                    <p>Bu yüzden bazen lambalar yanmaz. Çünkü elektrik başka yoldan kaçar! 🏃‍♂️</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌍 Doğada da Böyle!</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">💧</div>
+                        <p>Su aşağı akar</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🏃‍♂️</div>
+                        <p>Koşarak kestirme</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🌊</div>
+                        <p>Denizde akıntı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Kısa Yol Yarışı!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">Elektriğin hangi yolu seçeceğini tahmin et! 🤔</p>
+                    
+                    <!-- Yol Seçimi -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-lg">
+                        <div class="relative h-32">
+                            <!-- Başlangıç -->
+                            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl">🔋</div>
+                            
+                            <!-- Uzun Yol -->
+                            <div class="absolute left-12 top-2 w-32 h-4 bg-gray-300 rounded" id="longPath"></div>
+                            <div class="absolute left-20 top-2 text-2xl">💡</div>
+                            
+                            <!-- Kısa Yol -->
+                            <div class="absolute left-12 bottom-2 w-20 h-4 bg-gray-300 rounded" id="shortPath"></div>
+                            
+                            <!-- Bitiş -->
+                            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl">⚫</div>
+                        </div>
+                        
+                        <button onclick="showPath()" class="mt-4 bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                            <span class="text-xl mr-2">⚡</span> Elektriği Sal!
+                        </button>
+                    </div>
+                    
+                    <div id="pathStatus" class="text-xl font-bold mt-4">Hangi yolu seçecek? 🤷‍♂️</div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Anladın Mı?</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Elektrik hangi yolu seçer?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🏃‍♂️</span> En kısa yolu
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">🚶‍♂️</span> En uzun yolu
+                        </button>
+                    </div>
+                    <div id="quiz6Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 7: Alarm Sesleri -->
+    <div id="week7" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🚨</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">7. Hafta: Alarm Kutusu</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-red-50 dark:bg-red-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🚨 Alarm Nedir?</h2>
+                <div class="text-lg space-y-4">
+                    <p><strong>Alarm kutusu</strong> = Ses çıkaran sihirli kutu! 📢</p>
+                    <p>İçinde küçük hoparlör var. Elektrik verince ses çıkarır!</p>
+                    <p>Ambulans ve itfaiye seslerini taklit edebiliriz. Çok eğlenceli! 🎵</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🌟 Nerede Duyarız?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚑</div>
+                        <p>Ambulans</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚒</div>
+                        <p>İtfaiye</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🚓</div>
+                        <p>Polis</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🏠</div>
+                        <p>Ev Alarmı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-yellow-50 dark:bg-yellow-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Alarm Müzisyen!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">Farklı alarm seslerini dene! 🎵</p>
+                    
+                    <!-- Alarm Paneli -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-md">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <button onclick="playAlarm('ambulance')" class="bg-red-500 text-white p-4 rounded-xl hover:bg-red-600 transition-colors">
+                                <div class="text-3xl mb-2">🚑</div>
+                                <div>Ambulans</div>
+                            </button>
+                            <button onclick="playAlarm('fire')" class="bg-orange-500 text-white p-4 rounded-xl hover:bg-orange-600 transition-colors">
+                                <div class="text-3xl mb-2">🚒</div>
+                                <div>İtfaiye</div>
+                            </button>
+                        </div>
+                        
+                        <div id="alarmDisplay" class="text-4xl mb-4">🔇</div>
+                        <div id="alarmText" class="text-lg font-bold">Bir alarm seç!</div>
+                    </div>
+                    
+                    <button onclick="stopAlarm()" class="mt-4 bg-gray-500 text-white px-6 py-3 rounded-full hover:bg-gray-600 transition-colors">
+                        <span class="text-xl mr-2">⏹️</span> Durdur
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-purple-50 dark:bg-purple-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Alarm Uzmanı!</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Alarm kutusu ne işe yarar?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🔊</span> Ses çıkarır
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">💡</span> Işık yakar
+                        </button>
+                    </div>
+                    <div id="quiz7Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hafta 8: Müzik Kutusu -->
+    <div id="week8" class="min-h-screen p-4 hidden">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="goToMenu()" class="mb-6 flex items-center text-xl bg-primary text-white px-6 py-3 rounded-full hover:bg-purple-600 transition-colors">
+                <span class="text-2xl mr-2">🏠</span> Ana Menü
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="text-mega mb-4">🎵</div>
+                <h1 class="text-4xl font-bold text-primary mb-4">8. Hafta: Müzik Kutusu</h1>
+            </div>
+
+            <!-- Konu Anlatımı -->
+            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎵 Müzik Kutusu!</h2>
+                <div class="text-lg space-y-4">
+                    <p><strong>Müzik kutusu</strong> = Elektronik müzik yapan kutu! 🎹</p>
+                    <p>İçinde özel çip var. Farklı sesler ve müzikler çıkarabilir!</p>
+                    <p>Oyunlarda, oyuncaklarda ve çok yerde kullanılır! 🎮</p>
+                </div>
+            </div>
+
+            <!-- Gerçek Hayat Örnekleri -->
+            <div class="bg-green-50 dark:bg-green-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Nerede Var?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🎮</div>
+                        <p>Oyun Konsolları</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🧸</div>
+                        <p>Konuşan Oyuncaklar</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">📱</div>
+                        <p>Telefon Zil Sesi</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-huge mb-2">🎼</div>
+                        <p>Müzik Kutuları</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnteraktif Etkinlik -->
+            <div class="bg-pink-50 dark:bg-pink-900 p-6 rounded-2xl mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-center">🎮 Elektronik Orkestra!</h2>
+                <div class="text-center mb-6">
+                    <p class="text-xl mb-4">Kendi müziğini yap! 🎼</p>
+                    
+                    <!-- Müzik Paneli -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl mx-auto max-w-lg">
+                        <div class="grid grid-cols-3 gap-3 mb-6">
+                            <button onclick="playSound('beep')" class="music-btn bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-colors">
+                                <div class="text-2xl mb-1">🔵</div>
+                                <div class="text-sm">Bip</div>
+                            </button>
+                            <button onclick="playSound('ding')" class="music-btn bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition-colors">
+                                <div class="text-2xl mb-1">🟢</div>
+                                <div class="text-sm">Ding</div>
+                            </button>
+                            <button onclick="playSound('boop')" class="music-btn bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600 transition-colors">
+                                <div class="text-2xl mb-1">🟡</div>
+                                <div class="text-sm">Boop</div>
+                            </button>
+                            <button onclick="playSound('ping')" class="music-btn bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition-colors">
+                                <div class="text-2xl mb-1">🔴</div>
+                                <div class="text-sm">Ping</div>
+                            </button>
+                            <button onclick="playSound('swoosh')" class="music-btn bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-colors">
+                                <div class="text-2xl mb-1">🟣</div>
+                                <div class="text-sm">Swoosh</div>
+                            </button>
+                            <button onclick="playSound('click')" class="music-btn bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600 transition-colors">
+                                <div class="text-2xl mb-1">🟠</div>
+                                <div class="text-sm">Click</div>
+                            </button>
+                        </div>
+                        
+                        <div id="musicDisplay" class="text-4xl mb-4">🎵</div>
+                        <div id="musicText" class="text-lg font-bold">Bir tuşa bas ve müzik yap!</div>
+                    </div>
+                    
+                    <div class="mt-4 space-x-4">
+                        <button onclick="playMelody()" class="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition-colors">
+                            <span class="text-xl mr-2">🎼</span> Melodi Çal
+                        </button>
+                        <button onclick="stopMusic()" class="bg-gray-500 text-white px-6 py-3 rounded-full hover:bg-gray-600 transition-colors">
+                            <span class="text-xl mr-2">⏹️</span> Durdur
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="bg-orange-50 dark:bg-orange-900 p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-center">🧠 Müzik Ustası!</h2>
+                <div class="space-y-4">
+                    <p class="text-xl">Müzik kutusu nerede kullanılır?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, false)">
+                            <span class="text-2xl mr-2">💡</span> Sadece lambalarda
+                        </button>
+                        <button class="quiz-btn p-4 bg-white dark:bg-gray-800 rounded-xl border-2 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" onclick="selectAnswer(this, true)">
+                            <span class="text-2xl mr-2">🎮</span> Oyunlarda ve oyuncaklarda
+                        </button>
+                    </div>
+                    <div id="quiz8Result" class="text-center text-xl font-bold mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Navigation functions
+        function goToWeek(weekNumber) {
+            // Hide all sections
+            document.getElementById('mainMenu').classList.add('hidden');
+            for (let i = 1; i <= 8; i++) {
+                document.getElementById(`week${i}`).classList.add('hidden');
+            }
+            // Show selected week
+            document.getElementById(`week${weekNumber}`).classList.remove('hidden');
+        }
+
+        function goToMenu() {
+            // Hide all weeks
+            for (let i = 1; i <= 8; i++) {
+                document.getElementById(`week${i}`).classList.add('hidden');
+            }
+            // Show main menu
+            document.getElementById('mainMenu').classList.remove('hidden');
+        }
+
+        // Week 1: Manuel Switch
+        let switch1State = false;
+        function toggleSwitch1() {
+            switch1State = !switch1State;
+            const switch1 = document.getElementById('switch1');
+            const bulb1 = document.getElementById('bulb1');
+            const status1 = document.getElementById('status1');
+            
+            if (switch1State) {
+                switch1.classList.add('on');
+                bulb1.classList.add('on');
+                status1.textContent = 'Lamba Açık! ✨';
+                status1.className = 'text-xl font-bold text-yellow-500';
+            } else {
+                switch1.classList.remove('on');
+                bulb1.classList.remove('on');
+                status1.textContent = 'Lamba Kapalı 😴';
+                status1.className = 'text-xl font-bold';
+            }
+        }
+
+        // Week 2: Magnetic Switch
+        let magnetNear = false;
+        function startDrag(e) {
+            e.preventDefault();
+            const magnet = document.getElementById('magnet');
+            const magnetArea = document.getElementById('magnetArea');
+            const magnetZone = document.getElementById('magnetZone');
+            
+            function onMove(e) {
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                const rect = magnetArea.getBoundingClientRect();
+                
+                // Calculate relative position within the area
+                const x = Math.max(0, Math.min(rect.width - 80, clientX - rect.left - 40));
+                const y = Math.max(0, Math.min(rect.height - 80, clientY - rect.top - 40));
+                
+                magnet.style.left = x + 'px';
+                magnet.style.top = y + 'px';
+                
+                // Calculate distance to magnetic zone
+                const zoneRect = magnetZone.getBoundingClientRect();
+                const magnetRect = magnet.getBoundingClientRect();
+                
+                const zoneCenterX = zoneRect.left + zoneRect.width / 2;
+                const zoneCenterY = zoneRect.top + zoneRect.height / 2;
+                const magnetCenterX = magnetRect.left + magnetRect.width / 2;
+                const magnetCenterY = magnetRect.top + magnetRect.height / 2;
+                
+                const distance = Math.sqrt(
+                    Math.pow(zoneCenterX - magnetCenterX, 2) + 
+                    Math.pow(zoneCenterY - magnetCenterY, 2)
+                );
+                
+                updateMagnetEffect(distance);
+            }
+            
+            function onEnd() {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onEnd);
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onEnd);
+            }
+            
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+            document.addEventListener('touchmove', onMove);
+            document.addEventListener('touchend', onEnd);
+        }
+
+        function updateMagnetEffect(distance) {
+            const bulb2 = document.getElementById('bulb2');
+            const status2 = document.getElementById('status2');
+            const distanceIndicator = document.getElementById('distanceIndicator');
+            const magnetZone = document.getElementById('magnetZone');
+            
+            if (distance < 80) {
+                if (!magnetNear) {
+                    magnetNear = true;
+                    bulb2.classList.add('on');
+                    magnetZone.style.backgroundColor = '#10B981';
+                    magnetZone.style.borderColor = '#059669';
+                    status2.textContent = 'Harika! Lamba yandı! ✨';
+                    status2.className = 'text-xl font-bold text-yellow-500';
+                    distanceIndicator.textContent = 'Mesafe: Çok Yakın! 🎯';
+                    distanceIndicator.className = 'absolute top-2 left-2 text-sm text-green-400';
+                }
+            } else if (distance < 150) {
+                if (magnetNear) {
+                    magnetNear = false;
+                    bulb2.classList.remove('on');
+                    magnetZone.style.backgroundColor = '#FBBF24';
+                    magnetZone.style.borderColor = '#F59E0B';
+                }
+                status2.textContent = 'Yaklaşıyorsun! Biraz daha yaklaştır! 🧲';
+                status2.className = 'text-xl font-bold text-orange-400';
+                distanceIndicator.textContent = 'Mesafe: Yakın 👍';
+                distanceIndicator.className = 'absolute top-2 left-2 text-sm text-orange-400';
+            } else {
+                if (magnetNear) {
+                    magnetNear = false;
+                    bulb2.classList.remove('on');
+                }
+                magnetZone.style.backgroundColor = '#FBBF24';
+                magnetZone.style.borderColor = '#F59E0B';
+                status2.textContent = 'Mıknatısı sarı kutuya sürükle! 🎯';
+                status2.className = 'text-xl font-bold text-gray-300';
+                distanceIndicator.textContent = 'Mesafe: Uzak';
+                distanceIndicator.className = 'absolute top-2 left-2 text-sm text-gray-400';
+            }
+        }
+
+        function resetMagnet() {
+            const magnet = document.getElementById('magnet');
+            const bulb2 = document.getElementById('bulb2');
+            const magnetZone = document.getElementById('magnetZone');
+            
+            magnet.style.left = '50%';
+            magnet.style.top = '16px';
+            magnet.style.transform = 'translateX(-50%)';
+            
+            magnetNear = false;
+            bulb2.classList.remove('on');
+            magnetZone.style.backgroundColor = '#FBBF24';
+            magnetZone.style.borderColor = '#F59E0B';
+            
+            document.getElementById('status2').textContent = 'Mıknatısı sarı kutuya sürükle! 🎯';
+            document.getElementById('status2').className = 'text-xl font-bold text-gray-300';
+            document.getElementById('distanceIndicator').textContent = 'Mesafe: Uzak';
+            document.getElementById('distanceIndicator').className = 'absolute top-2 left-2 text-sm text-gray-400';
+        }
+
+        function testMagnetPower(value) {
+            const powerBar = document.getElementById('powerBar');
+            const testBulb = document.getElementById('testBulb');
+            const powerStatus = document.getElementById('powerStatus');
+            
+            powerBar.style.width = value + '%';
+            
+            if (value > 70) {
+                testBulb.textContent = '💡';
+                testBulb.classList.add('on');
+                powerStatus.textContent = 'Çok güçlü! Lamba parlak yanıyor! ✨';
+                powerStatus.className = 'text-center mt-4 font-bold text-yellow-500';
+            } else if (value > 40) {
+                testBulb.textContent = '💡';
+                testBulb.classList.remove('on');
+                powerStatus.textContent = 'Orta güç. Lamba zayıf yanıyor. 🔆';
+                powerStatus.className = 'text-center mt-4 font-bold text-orange-500';
+            } else {
+                testBulb.textContent = '💡';
+                testBulb.classList.remove('on');
+                powerStatus.textContent = 'Çok uzak. Mıknatıs etkisiz. 😴';
+                powerStatus.className = 'text-center mt-4 font-bold text-gray-500';
+            }
+        }
+
+        // Week 3: Series Circuit
+        let seriesState = false;
+        function toggleSeries() {
+            seriesState = !seriesState;
+            const seriesSwitch = document.getElementById('seriesSwitch');
+            const bulb1 = document.getElementById('seriesBulb1');
+            const bulb2 = document.getElementById('seriesBulb2');
+            const wires = [document.getElementById('wire1'), document.getElementById('wire2'), document.getElementById('wire3')];
+            const status = document.getElementById('seriesStatus');
+            
+            if (seriesState) {
+                seriesSwitch.classList.add('on');
+                bulb1.classList.add('on');
+                bulb2.classList.add('on');
+                wires.forEach(wire => wire.classList.add('active'));
+                status.textContent = 'İki lamba da açık! Seri devre çalışıyor! ✨';
+                status.className = 'text-xl font-bold text-yellow-500';
+            } else {
+                seriesSwitch.classList.remove('on');
+                bulb1.classList.remove('on');
+                bulb2.classList.remove('on');
+                wires.forEach(wire => wire.classList.remove('active'));
+                status.textContent = 'Devre kapalı. Hiçbir lamba yanmıyor 😴';
+                status.className = 'text-xl font-bold';
+            }
+        }
+
+        // Week 4: Parallel Circuit
+        let parallel1State = false;
+        let parallel2State = false;
+        function toggleParallel(branch) {
+            if (branch === 1) {
+                parallel1State = !parallel1State;
+                const switch1 = document.getElementById('parallelSwitch1');
+                const bulb1 = document.getElementById('parallelBulb1');
+                const wire1 = document.getElementById('wireP1');
+                const wire2 = document.getElementById('wireP2');
+                
+                if (parallel1State) {
+                    switch1.classList.add('on');
+                    bulb1.classList.add('on');
+                    wire1.classList.add('active');
+                    wire2.classList.add('active');
+                } else {
+                    switch1.classList.remove('on');
+                    bulb1.classList.remove('on');
+                    wire1.classList.remove('active');
+                    wire2.classList.remove('active');
+                }
+            } else {
+                parallel2State = !parallel2State;
+                const switch2 = document.getElementById('parallelSwitch2');
+                const bulb2 = document.getElementById('parallelBulb2');
+                const wire3 = document.getElementById('wireP3');
+                const wire4 = document.getElementById('wireP4');
+                
+                if (parallel2State) {
+                    switch2.classList.add('on');
+                    bulb2.classList.add('on');
+                    wire3.classList.add('active');
+                    wire4.classList.add('active');
+                } else {
+                    switch2.classList.remove('on');
+                    bulb2.classList.remove('on');
+                    wire3.classList.remove('active');
+                    wire4.classList.remove('active');
+                }
+            }
+            
+            const status = document.getElementById('parallelStatus');
+            if (parallel1State && parallel2State) {
+                status.textContent = 'İki lamba da açık! Paralel devre! ✨';
+                status.className = 'text-xl font-bold text-yellow-500';
+            } else if (parallel1State || parallel2State) {
+                status.textContent = 'Bir lamba açık! Diğeri kapalı! 💡';
+                status.className = 'text-xl font-bold text-blue-500';
+            } else {
+                status.textContent = 'İki lamba da kapalı 😴';
+                status.className = 'text-xl font-bold';
+            }
+        }
+
+        // Week 5: LED
+        let ledState = false;
+        let ledDirection = true; // true = correct, false = wrong
+        function toggleLED() {
+            ledState = !ledState;
+            const ledSwitch = document.getElementById('ledSwitch');
+            const ledLight = document.getElementById('ledLight');
+            const wire1 = document.getElementById('ledWire1');
+            const wire2 = document.getElementById('ledWire2');
+            const status = document.getElementById('ledStatus');
+            
+            if (ledState) {
+                ledSwitch.classList.add('on');
+                if (ledDirection) {
+                    ledLight.classList.add('on');
+                    wire1.classList.add('active');
+                    wire2.classList.add('active');
+                    status.textContent = 'LED yanar! Doğru yönde! ✅';
+                    status.className = 'text-xl font-bold text-green-500';
+                } else {
+                    status.textContent = 'LED yanmaz! Yanlış yönde! ❌';
+                    status.className = 'text-xl font-bold text-red-500';
+                }
+            } else {
+                ledSwitch.classList.remove('on');
+                ledLight.classList.remove('on');
+                wire1.classList.remove('active');
+                wire2.classList.remove('active');
+                status.textContent = 'LED kapalı 😴';
+                status.className = 'text-xl font-bold';
+            }
+        }
+
+        function flipLED() {
+            ledDirection = !ledDirection;
+            const ledLight = document.getElementById('ledLight');
+            
+            // Update LED color and direction immediately
+            if (ledDirection) {
+                ledLight.textContent = '🟢'; // Green for correct direction
+                ledLight.style.transform = 'scaleX(1)';
+            } else {
+                ledLight.textContent = '🔴'; // Red for wrong direction  
+                ledLight.style.transform = 'scaleX(-1)';
+            }
+            
+            // Update if switch is on
+            if (ledState) {
+                toggleLED();
+                toggleLED();
+            } else {
+                const status = document.getElementById('ledStatus');
+                status.textContent = `LED ${ledDirection ? 'doğru' : 'yanlış'} yönde. Anahtarı dene! 🔄`;
+                status.className = `text-xl font-bold ${ledDirection ? 'text-green-500' : 'text-red-500'}`;
+            }
+        }
+
+        // Week 6: Shortest Path
+        function showPath() {
+            const longPath = document.getElementById('longPath');
+            const shortPath = document.getElementById('shortPath');
+            const status = document.getElementById('pathStatus');
+            
+            // Reset
+            longPath.style.background = '#D1D5DB';
+            shortPath.style.background = '#D1D5DB';
+            
+            setTimeout(() => {
+                shortPath.style.background = 'linear-gradient(90deg, #FFD700, #F59E0B)';
+                shortPath.style.boxShadow = '0 0 10px #FFD700';
+                status.textContent = 'Elektrik kısa yolu seçti! ⚡';
+                status.className = 'text-xl font-bold text-yellow-500';
+            }, 500);
+        }
+
+        // Week 7: Alarm Sounds
+        let currentAlarm = null;
+        function playAlarm(type) {
+            stopAlarm();
+            const display = document.getElementById('alarmDisplay');
+            const text = document.getElementById('alarmText');
+            
+            if (type === 'ambulance') {
+                display.textContent = '🚑';
+                text.textContent = 'Nee-naw nee-naw! Ambulans geliyor!';
+                text.className = 'text-lg font-bold text-red-500';
+                currentAlarm = setInterval(() => {
+                    display.textContent = display.textContent === '🚑' ? '🔴' : '🚑';
+                }, 500);
+            } else if (type === 'fire') {
+                display.textContent = '🚒';
+                text.textContent = 'Woo-woo-woo! İtfaiye geliyor!';
+                text.className = 'text-lg font-bold text-orange-500';
+                currentAlarm = setInterval(() => {
+                    display.textContent = display.textContent === '🚒' ? '🔥' : '🚒';
+                }, 300);
+            }
+        }
+
+        function stopAlarm() {
+            if (currentAlarm) {
+                clearInterval(currentAlarm);
+                currentAlarm = null;
+            }
+            document.getElementById('alarmDisplay').textContent = '🔇';
+            document.getElementById('alarmText').textContent = 'Alarm durdu';
+            document.getElementById('alarmText').className = 'text-lg font-bold';
+        }
+
+        // Week 8: Music Box
+        let currentMusic = null;
+        function playSound(sound) {
+            const display = document.getElementById('musicDisplay');
+            const text = document.getElementById('musicText');
+            
+            const sounds = {
+                beep: { emoji: '🔵', text: 'Bip!' },
+                ding: { emoji: '🟢', text: 'Ding!' },
+                boop: { emoji: '🟡', text: 'Boop!' },
+                ping: { emoji: '🔴', text: 'Ping!' },
+                swoosh: { emoji: '🟣', text: 'Swoosh!' },
+                click: { emoji: '🟠', text: 'Click!' }
+            };
+            
+            if (sounds[sound]) {
+                display.textContent = sounds[sound].emoji;
+                text.textContent = sounds[sound].text;
+                text.className = 'text-lg font-bold text-blue-500';
+                
+                setTimeout(() => {
+                    display.textContent = '🎵';
+                    text.textContent = 'Müzik yap!';
+                    text.className = 'text-lg font-bold';
+                }, 1000);
+            }
+        }
+
+        function playMelody() {
+            stopMusic();
+            const display = document.getElementById('musicDisplay');
+            const text = document.getElementById('musicText');
+            
+            text.textContent = 'Güzel melodi çalıyor! 🎼';
+            text.className = 'text-lg font-bold text-purple-500';
+            
+            const notes = ['🎵', '🎶', '🎼', '🎤', '🎹'];
+            let index = 0;
+            
+            currentMusic = setInterval(() => {
+                display.textContent = notes[index % notes.length];
+                index++;
+            }, 400);
+            
+            setTimeout(() => {
+                stopMusic();
+            }, 5000);
+        }
+
+        function stopMusic() {
+            if (currentMusic) {
+                clearInterval(currentMusic);
+                currentMusic = null;
+            }
+            document.getElementById('musicDisplay').textContent = '🎵';
+            document.getElementById('musicText').textContent = 'Müzik durdu';
+            document.getElementById('musicText').className = 'text-lg font-bold';
+        }
+
+        // Quiz functions
+        function selectAnswer(button, isCorrect) {
+            const allButtons = button.parentElement.querySelectorAll('.quiz-btn');
+            allButtons.forEach(btn => {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            });
+            
+            const weekNumber = getCurrentWeek();
+            const resultDiv = document.getElementById(`quiz${weekNumber}Result`);
+            
+            if (isCorrect) {
+                button.style.backgroundColor = '#10B981';
+                button.style.color = 'white';
+                button.style.opacity = '1';
+                resultDiv.textContent = 'Doğru! Aferin! 🎉';
+                resultDiv.className = 'text-center text-xl font-bold text-green-500';
+            } else {
+                button.style.backgroundColor = '#EF4444';
+                button.style.color = 'white';
+                button.style.opacity = '1';
+                resultDiv.textContent = 'Tekrar dene! 💭';
+                resultDiv.className = 'text-center text-xl font-bold text-red-500';
+                
+                // Re-enable buttons after 2 seconds
+                setTimeout(() => {
+                    allButtons.forEach(btn => {
+                        btn.style.pointerEvents = 'auto';
+                        btn.style.opacity = '1';
+                        btn.style.backgroundColor = '';
+                        btn.style.color = '';
+                    });
+                    resultDiv.textContent = '';
+                }, 2000);
+            }
+        }
+
+        function getCurrentWeek() {
+            for (let i = 1; i <= 8; i++) {
+                if (!document.getElementById(`week${i}`).classList.contains('hidden')) {
+                    return i;
+                }
+            }
+            return 1;
+        }
+
+        // Week 1 additional functions
+        function discoverRoom(room) {
+            const switchesDiv = document.getElementById(room + '-switches');
+            if (switchesDiv.classList.contains('hidden')) {
+                switchesDiv.classList.remove('hidden');
+                switchesDiv.style.animation = 'fadeIn 0.5s ease-in';
+            }
+        }
+
+        // Week 2 additional functions
+        function testMagnetic(item) {
+            const resultDiv = document.getElementById(item + '-result');
+            if (resultDiv.classList.contains('hidden')) {
+                resultDiv.classList.remove('hidden');
+                resultDiv.style.animation = 'fadeIn 0.5s ease-in';
+            }
+        }
+    </script>
+
+
+</body></html>
